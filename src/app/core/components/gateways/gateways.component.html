@@ -1,0 +1,136 @@
+<div class="container">
+
+  <mat-card class="custom-card">
+
+    <mat-card-title class="custom-card-title" i18n style="display: flex;align-items: center;">
+      Gateways List
+      <button mat-flat-button routerLink="/gateway/add" color="primary" style="margin-left: auto;border: 1px solid;">
+        <mat-icon svgIcon="app-close" aria-hidden="false" style="transform: rotate(45deg)" class="add-icon"></mat-icon>
+        Add
+      </button>
+    </mat-card-title>
+
+    <mat-card-content class="c-loading" *ngIf="isLoading">
+      <mat-spinner [diameter]="60"></mat-spinner>
+      <p style="margin-top: 1rem" i18n>Loading...</p>
+    </mat-card-content>
+    <mat-card-content *ngIf="!isLoading">
+      <mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="displayName">
+          <mat-header-cell *matHeaderCellDef i18n> Gateway Name</mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="Name Id">
+            <span class="">{{ row.displayName }}</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ipv4_address">
+          <mat-header-cell *matHeaderCellDef i18n> IP Address</mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="Ip Address">
+            <span class="">{{ row.ipv4_address }}</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="p_devices">
+          <mat-header-cell *matHeaderCellDef i18n> Peripheral Devices</mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="Devices">
+            <div class="device-container" *ngIf="row.p_devices.length">
+              <span>{{ row.p_devices[0].vendor }} - {{ row.p_devices[0].uid }}</span>
+              <div class="fletter color-primary" style="margin-left: 1rem;" *ngIf="row.p_devices?.length >1">
+                +{{row.p_devices?.length -1}}
+              </div>
+            </div>
+            <div *ngIf="!row.p_devices.length">--</div>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef i18n></mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="actions">
+            <div class="actions">
+              <mat-icon svgIcon="app-eye" aria-hidden="false" (click)="gatewayDetail(row)"></mat-icon>
+              <mat-icon svgIcon="app-edit" aria-hidden="false" [routerLink]="['/gateway',row.id]"></mat-icon>
+              <mat-icon svgIcon="app-delete" aria-hidden="false" (click)="deleteGateway(row)"></mat-icon>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; let even = even; columns: displayedColumns" [ngClass]="{ gray: even }">
+        </mat-row>
+      </mat-table>
+      <br>
+      <mat-paginator *ngIf="!isLoading" [pageIndex]="page - 1" [pageSize]="pageSize"
+                     [length]="totalRecords" [pageSizeOptions]="pageSizes" showFirstLastButtons
+                     (page)="changePage($event)">
+      </mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<ng-template #gatewayDialog let-data>
+  <div class="confirm" *ngIf="dialogAction==='confirm'">
+    <div class="close">
+      <mat-icon svgIcon="app-close" aria-hidden="false" (click)="closeDialog()"></mat-icon>
+    </div>
+    <mat-dialog-content>
+      <div class="confirmation-content">
+        <mat-icon>error_outline</mat-icon>
+        <p i18n>You've selected this device to delete from the gateway.</p>
+        <p i18n>Are you sure you wish to continue?</p>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="center">
+      <button type="button" mat-stroked-button (click)="closeDialog()" color="primary" i18n>No</button>
+      <button type="button" mat-flat-button color="primary"
+              (click)="confirmSelection()" i18n>Yes
+      </button>
+    </mat-dialog-actions>
+  </div>
+  <div class="gatewayDetail" *ngIf="dialogAction==='detail'">
+    <div class="gatewayDetail_header">
+      <div class="fletter color-primary">
+        {{initials[0].charAt(0)}} <span *ngIf="initials.length>1">{{initials[1].charAt(0)}}</span>
+      </div>
+      <h3>{{selectedGateway.displayName}}</h3>
+      <p>IPv4: ({{selectedGateway.ipv4_address}})</p>
+    </div>
+    <div class="gatewayDetail_content">
+
+      <mat-table [dataSource]="gatewayDevices">
+
+        <ng-container matColumnDef="uid">
+          <mat-header-cell *matHeaderCellDef i18n> Device UID</mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="UID">
+            <span>{{ row.uid }}</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="vendor">
+          <mat-header-cell *matHeaderCellDef i18n> Vendor</mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="Vendor">
+            <span>{{ row.vendor }}</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="createdDate">
+          <mat-header-cell *matHeaderCellDef i18n> Created Date</mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="Devices">
+            <span>{{ row.createdDate | date:'longDate'}}</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef i18n>Status</mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="Status">
+            <span class="green" [class.red]="row.status === 0">{{statusEnum[row.status]}}</span>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="devicesColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; let even = even; columns: devicesColumns" [ngClass]="{ gray: even }">
+        </mat-row>
+      </mat-table>
+    </div>
+  </div>
+</ng-template>
