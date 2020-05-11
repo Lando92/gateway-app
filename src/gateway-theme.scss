@@ -1,0 +1,221 @@
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$mat-gateway-primary: (
+  50 : #e4e5e6,
+  100 : #babec1,
+  200 : #8d9298,
+  300 : #5f666e,
+  400 : #3c464f,
+  500 : #297fb8, // #1a2530
+  600 : #17212b,
+  700 : #131b24,
+  800 : #0f161e,
+  900 : #080d13,
+  A100 : #569eff,
+  A200 : #2381ff,
+  A400 : #0066ef,
+  A700 : #005bd5,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+$mat-gateway-accent: (
+  50 : #e9f2ff,
+  100 : #c8ddff,
+  200 : #a3c7ff,
+  300 : #7eb1ff,
+  400 : #63a0ff,
+  500 : #478fff,
+  600 : #4087ff,
+  700 : #377cff,
+  800 : #2f72ff,
+  900 : #2060ff,
+  A100 : #ffffff,
+  A200 : #ffffff,
+  A400 : #cfdcff,
+  A700 : #b6c9ff,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$mat-gateway-warn: (
+  50 : #ffeee8,
+  100 : #ffd4c7,
+  200 : #ffb8a1,
+  300 : #fe9b7b,
+  400 : #fe855f,
+  500 : #fe7043,
+  600 : #fe683d,
+  700 : #fe5d34,
+  800 : #fe532c,
+  900 : #fd411e,
+  A100 : #ffffff,
+  A200 : #ffffff,
+  A400 : #ffd3cc,
+  A700 : #ffbdb2,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$gateway-app-primary: mat-palette($mat-gateway-primary);
+$gateway-app-accent: mat-palette($mat-gateway-accent);
+
+// The warn palette is optional (defaults to red).
+$gateway-app-warn: mat-palette($mat-gateway-warn);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$gateway-app-theme: mat-light-theme($gateway-app-primary, $gateway-app-accent, $gateway-app-warn);
+
+// Custom card Header theme
+@mixin gateway-card-title($theme) {
+  .custom-card-title {
+    padding: 1.2rem;
+    background: map-get($theme, 500);
+    color: mat-color($theme, default-contrast);
+    margin-bottom: 0px !important;
+    font-size: 16px !important;
+  }
+}
+
+// Custom element primary color
+@mixin color-primary($theme) {
+  .color-primary {
+    background: map-get($theme, 500);
+    color: mat-color($theme, default-contrast);
+  }
+}
+
+//Define a custom dialog theme
+
+@mixin gateway-dialog-theme($theme) {
+
+  .gatewayBackdrop {
+    background: map-get($theme, 600);
+    opacity: .8 !important;
+  }
+
+  .gatewayDialog .mat-dialog-container {
+    padding-top: 0;
+    border-radius: 0;
+  }
+
+  .gatewayDialog .header {
+    margin-left: -24px;
+    margin-right: -24px;
+    background: map-get($theme, 500);
+    margin-bottom: 15px;
+    padding: 8px 24px;
+    color: #fff;
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .gatewayDialog .header > p {
+    margin: 10px 0 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  .gatewayDialog p {
+    color: #666;
+  }
+
+  .gatewayDialog .actions {
+    text-align: right;
+  }
+
+  .gatewayDialog .mat-dialog-actions {
+    justify-content: flex-end;
+  }
+
+  .gatewayDialog .mat-dialog-actions button {
+    text-transform: uppercase;
+  }
+
+  .gatewayDialog .mat-dialog-actions button.btn-primary {
+    color: map-get($theme, 500);
+  }
+
+}
+
+// Set adoptcard theme
+@include gateway-card-title($gateway-app-primary);
+
+// Set primary color  theme
+@include color-primary($gateway-app-primary);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($gateway-app-theme);
+
+// Set dialog theme
+@include gateway-dialog-theme($gateway-app-primary);
+
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+$gateway-typography: mat-typography-config(
+  $font-family: 'Roboto'
+);
+
+@include angular-material-typography($gateway-typography);
+
+// Export theme colors
+$primary: mat-color($gateway-app-primary);
+$accent: mat-color($gateway-app-accent);
+$warn: mat-color($gateway-app-warn);
+.icon__detail {
+}
