@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatTableDataSource} from '@angular/material/table';
 import {Gateway, PDevice, Status} from '../../../models';
 import {GatewayService} from '../../../services/gateway.service';
@@ -22,6 +22,7 @@ export class AddEditGatewayComponent implements OnInit, OnDestroy {
   deviceDatasource: MatTableDataSource<any>;
   gatewayDevices: PDevice[];
   devicesColumns: string[];
+  todayDate: Date = new Date();
   status = [
     {value: 0, status: 'Offline'},
     {value: 1, status: 'Online'}
@@ -62,14 +63,15 @@ export class AddEditGatewayComponent implements OnInit, OnDestroy {
 
   initializeComponent() {
     this.gatewayForm = new FormGroup({
-      name: new FormControl(''),
-      ipAddress: new FormControl(''),
+      name: new FormControl('', [Validators.required]),
+      ipAddress: new FormControl('', [Validators.required,
+        Validators.pattern('^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$')]),
     });
     this.deviceForm = new FormGroup({
-      uid: new FormControl(''),
-      vendor: new FormControl(''),
-      createdDate: new FormControl(''),
-      status: new FormControl(''),
+      uid: new FormControl('', [Validators.required]),
+      vendor: new FormControl('', [Validators.required]),
+      createdDate: new FormControl('', [Validators.required]),
+      status: new FormControl('', [Validators.required]),
     });
     if (!this.isEditing) {
       this.gatewayDevices = [];
@@ -78,6 +80,11 @@ export class AddEditGatewayComponent implements OnInit, OnDestroy {
   }
 
   addDevice() {
+    const duplicated = this.gatewayDevices.find(x => x.uid === this.deviceForm.controls.uid.value);
+    if (duplicated) {
+      this.toasterService.showErrorToaster('Device is already in gateway');
+      return;
+    }
     const temp: PDevice = {
       uid: this.deviceForm.controls.uid.value,
       vendor: this.deviceForm.controls.vendor.value,

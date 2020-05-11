@@ -18,7 +18,7 @@ export class ToasterService {
 
   showSuccessToaster(msg: string, duration?: number) {
     this.snackBar.open(msg, null, {
-      duration: duration ? duration : 5000,
+      duration: duration ? duration : 3000,
       horizontalPosition: 'left',
       panelClass: ['success-snackbar']
     });

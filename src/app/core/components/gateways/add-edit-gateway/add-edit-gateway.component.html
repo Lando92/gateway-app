@@ -12,12 +12,22 @@
             <mat-form-field
               class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-desktop">
               <mat-label i18n>Gateway Name</mat-label>
-              <input matInput formControlName="name">
+              <input matInput formControlName="name" required>
+              <mat-error *ngIf="gatewayForm.get('name').hasError('required')">
+                Gateway Name field is required.
+              </mat-error>
             </mat-form-field>
             <mat-form-field
               class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-desktop">
               <mat-label i18n>Gateway IPv4 Address</mat-label>
-              <input matInput formControlName="ipAddress">
+              <input matInput formControlName="ipAddress" required>
+              <mat-error *ngIf="gatewayForm.get('ipAddress').hasError('required')">
+                Gateway IPv4 field is required.
+              </mat-error>
+              <mat-error
+                *ngIf="!gatewayForm.get('ipAddress').hasError('required') && gatewayForm.get('ipAddress').invalid">
+                Invalid IPv4 Address.
+              </mat-error>
             </mat-form-field>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
               <mat-card class="custom-card mat-elevation-z0">
@@ -84,32 +94,37 @@
 
             </div>
           </div>
-          <div class="device-panel mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
-            <h3>Add new device</h3>
+          <div
+            class="device-panel mdc-layout-grid__cell mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--span-3">
+            <h3 style="margin: 0">Add new device</h3>
+            <mat-error *ngIf="gatewayDevices.length === 10" style="font-size: 75%;">No more that 10 peripheral devices
+              are allowed.
+            </mat-error>
             <form [formGroup]="deviceForm">
               <div class="mdc-layout-grid__inner">
                 <mat-form-field
                   class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9">
                   <mat-label i18n>Device UID</mat-label>
-                  <input type="number" matInput formControlName="uid">
+                  <input type="number" matInput formControlName="uid" [readonly]="gatewayDevices.length === 10"
+                         required>
                 </mat-form-field>
                 <mat-form-field
                   class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9">
                   <mat-label i18n>Device Vendor</mat-label>
-                  <input matInput formControlName="vendor">
+                  <input matInput formControlName="vendor" [readonly]="gatewayDevices.length === 10" required>
                 </mat-form-field>
                 <mat-form-field
                   class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9">
                   <mat-label i18n>Created Date</mat-label>
-                  <input matInput [matDatepicker]="createdDate" placeholder="Created Date"
-                         formControlName="createdDate">
+                  <input matInput [matDatepicker]="createdDate" placeholder="Created Date" [max]="todayDate"
+                         formControlName="createdDate" [disabled]="gatewayDevices.length === 10" required>
                   <mat-datepicker-toggle matSuffix [for]="createdDate"></mat-datepicker-toggle>
                   <mat-datepicker #createdDate></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field
                   class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9">
                   <mat-label i18n>Status</mat-label>
-                  <mat-select formControlName="status">
+                  <mat-select formControlName="status" [disabled]="gatewayDevices.length === 10" required="">
                     <mat-option *ngFor="let selectedStatus of status" [value]="selectedStatus.value"
                                 [title]="selectedStatus.status">
                       {{ selectedStatus.status}}
@@ -118,7 +133,8 @@
                 </mat-form-field>
               </div>
               <div style="display: flex; justify-content: flex-end;margin-top: 2rem">
-                <button mat-flat-button type="button" (click)="addDevice()" [disabled]="deviceForm.invalid"
+                <button mat-flat-button type="button" (click)="addDevice()"
+                        [disabled]="deviceForm.invalid || gatewayDevices.length === 10"
                         color="primary">Add Device
                 </button>
               </div>
