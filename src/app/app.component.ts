@@ -13,8 +13,7 @@ export class AppComponent {
   constructor(private matIconRegistry: MatIconRegistry,
               private domSanitizer: DomSanitizer) {
     [
-      'close', 'edit', 'delete', 'eye'
-    ].forEach((iconName) => this.matIconRegistry.addSvgIcon(
+      'close', 'edit', 'delete', 'eye'].forEach((iconName) => this.matIconRegistry.addSvgIcon(
       `app-${iconName}`,
       this.domSanitizer.bypassSecurityTrustResourceUrl(`../assets/img/${iconName}.svg`)
     ));

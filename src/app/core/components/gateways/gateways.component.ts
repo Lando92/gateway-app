@@ -27,6 +27,7 @@ export class GatewaysComponent implements OnInit, OnDestroy {
   dialogRef: MatDialogRef<any>;
   initials: any;
   statusEnum = Status;
+
   @ViewChild(MatPaginator, {static: false}) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
     this.setDataSourceAttributes();
@@ -102,6 +103,10 @@ export class GatewaysComponent implements OnInit, OnDestroy {
     if (this.dataSource) {
       this.dataSource.paginator = this.paginator;
     }
+  }
+
+  goToEdit(id: any) {
+    this.router.navigate(['/gateway', id]);
   }
 
   deleteGateway(gateway) {

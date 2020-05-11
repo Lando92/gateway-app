@@ -5,7 +5,6 @@
     <mat-card-title class="custom-card-title" i18n style="display: flex;align-items: center;">
       Gateways List
       <button mat-flat-button routerLink="/gateway/add" color="primary" style="margin-left: auto;border: 1px solid;">
-        <mat-icon svgIcon="app-close" aria-hidden="false" style="transform: rotate(45deg)" class="add-icon"></mat-icon>
         Add
       </button>
     </mat-card-title>
@@ -49,7 +48,7 @@
           <mat-cell *matCellDef="let row" data-label="actions">
             <div class="actions">
               <mat-icon svgIcon="app-eye" aria-hidden="false" (click)="gatewayDetail(row)"></mat-icon>
-              <mat-icon svgIcon="app-edit" aria-hidden="false" [routerLink]="['/gateway',row.id]"></mat-icon>
+              <mat-icon svgIcon="app-edit" aria-hidden="false" (click)="goToEdit(row.id)"></mat-icon>
               <mat-icon svgIcon="app-delete" aria-hidden="false" (click)="deleteGateway(row)"></mat-icon>
             </div>
           </mat-cell>

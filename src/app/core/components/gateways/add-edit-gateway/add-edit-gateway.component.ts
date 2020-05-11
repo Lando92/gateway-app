@@ -123,7 +123,6 @@ export class AddEditGatewayComponent implements OnInit, OnDestroy {
   getPatchedObject() {
     const gateway = {};
     const equalArrays = isEqual(this.currentGateway.p_devices, this.gatewayDevices);
-    console.log(this.currentGateway.p_devices, this.gatewayDevices);
     if (this.currentGateway.displayName !== this.gatewayForm.controls.name.value) {
       gateway['displayName'] = this.gatewayForm.controls.name.value;
     }
@@ -133,7 +132,6 @@ export class AddEditGatewayComponent implements OnInit, OnDestroy {
     if (!equalArrays) {
       gateway['p_devices'] = this.gatewayDevices;
     }
-    console.log(gateway);
     return gateway;
   }
 
