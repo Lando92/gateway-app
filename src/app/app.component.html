@@ -1,0 +1,35 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<mat-toolbar class="toolbar" color="primary">
+  <div class="logo__container">
+    <img class="logo" src="assets/img/gateway-icon.png" width="45px">
+    <span class="toolbar__text" routerLink="/">Gateway App</span>
+  </div>
+  <div class="toolbar__menus-desktop">
+    <button mat-button routerLink="/gateway" i18n>Gateways</button>
+    <button mat-button routerLink="/gateway/device" i18n>Peripheral Devices</button>
+    <!--<button mat-button routerLink="tryout/employees" i18n>Employees</button>-->
+  </div>
+
+  <div class="toolbar__menus-tab-port">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/gateway" i18n>Gateways</button>
+      <button mat-menu-item routerLink="/gateway/device" i18n>Peripheral Devices</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+<div class="app-content">
+  <router-outlet></router-outlet>
+</div>
+<footer class="footer color-primary">
+  <div class="footer__logo-box">
+    <span>Gateway App &reg;</span>
+  </div>
+  <div class="footer__text">
+    <p class="footer__copyright" i18n>
+      Created by <a href="#" class="footer__link">Orlando Sierra</a> for job applications. &copy; 2020
+    </p>
+  </div>
+</footer>
