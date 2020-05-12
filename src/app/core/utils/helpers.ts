@@ -33,7 +33,7 @@ export function errorHandle(serverResponse: any): Observable<any> {
   const response = (serverResponse instanceof Array && serverResponse.length > 0) ? serverResponse[0] : serverResponse;
 
   if (response instanceof Response) {
-    const err = response.json() || '';
+    const err: any = response.json() || '';
     body = err.error ? err.error : connectionIssueResponse.body;
   } else if (response instanceof HttpErrorResponse) {
     if (response.error && !response.error.message) {

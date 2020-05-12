@@ -121,7 +121,7 @@ export class AddEditGatewayComponent implements OnInit, OnDestroy {
   }
 
   getPatchedObject() {
-    const gateway = {};
+    const gateway: any = {};
     const equalArrays = isEqual(this.currentGateway.p_devices, this.gatewayDevices);
     if (this.currentGateway.displayName !== this.gatewayForm.controls.name.value) {
       gateway.displayName = this.gatewayForm.controls.name.value;

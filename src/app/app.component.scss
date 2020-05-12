@@ -4,7 +4,47 @@
   box-shadow: 0 0.1rem 0.9rem rgba(0, 0, 0, .9);
   position: fixed;
   z-index: 2;
+  &__menus-desktop {
+    display: inline-block;
 
+    @include respond(tab-port) {
+      display: none;
+    }
+  }
+  &__menus-tab-port {
+    display: none;
+    @include respond(tab-port) {
+      display: inline-block;
+    }
+  }
+  &__icon, &__text {
+    cursor: pointer;
+  }
+  &__icon:focus, &__text:focus {
+    outline: none;
+  }
+
+  &__icon {
+    font-size: 4.5rem;
+    -webkit-transform: rotate(45deg) skewY(-24deg);
+    transform: rotate(45deg) skewY(-24deg);
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+  &__text {
+    margin-left: 2rem;
+    text-transform: uppercase;
+    margin-top: 1rem;
+  }
+  .logo__container {
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    .logo {
+      filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(162deg) brightness(101%) contrast(104%);
+    }
+  }
 }
 
 .footer {
