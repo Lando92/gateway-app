@@ -1,20 +1,12 @@
 @import "../../styles";
 
 .header {
-  padding: 10rem;
   color: #ffff;
   background: #4e94c3;
   clip-path: polygon(100% 0, 0 0, 0 100%, 100% 80%);
   height: 75vh;
-  padding-top: 15rem;
-  &__headline {
-    display: flex;
-    flex-direction: column;
-  }
+  padding: 15rem 10rem 10rem;
 
-  &__title, &__subtitle {
-    text-align: center;
-  }
   &__title {
     font-size: 5.6rem;
     font-weight: 400;
@@ -50,8 +42,7 @@
     display: flex;
     padding: 0 15rem;
     align-items: center;
-    margin: 10rem 0;
-    margin-top: 1rem;
+    margin: 1rem 0 10rem;
     @include respond(tab-port) {
       margin: 2rem 0;
     }
