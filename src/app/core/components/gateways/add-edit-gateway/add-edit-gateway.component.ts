@@ -124,13 +124,13 @@ export class AddEditGatewayComponent implements OnInit, OnDestroy {
     const gateway = {};
     const equalArrays = isEqual(this.currentGateway.p_devices, this.gatewayDevices);
     if (this.currentGateway.displayName !== this.gatewayForm.controls.name.value) {
-      gateway['displayName'] = this.gatewayForm.controls.name.value;
+      gateway.displayName = this.gatewayForm.controls.name.value;
     }
     if (this.currentGateway.ipv4_address !== this.gatewayForm.controls.ipAddress.value) {
-      gateway['ipv4_address'] = this.gatewayForm.controls.ipAddress.value;
+      gateway.ipv4_address = this.gatewayForm.controls.ipAddress.value;
     }
     if (!equalArrays) {
-      gateway['p_devices'] = this.gatewayDevices;
+      gateway.p_devices = this.gatewayDevices;
     }
     return gateway;
   }

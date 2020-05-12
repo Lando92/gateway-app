@@ -34,7 +34,7 @@ export function errorHandle(serverResponse: any): Observable<any> {
 
   if (response instanceof Response) {
     const err = response.json() || '';
-    body = err['error'] ? err['error'] : connectionIssueResponse.body;
+    body = err.error ? err.error : connectionIssueResponse.body;
   } else if (response instanceof HttpErrorResponse) {
     if (response.error && !response.error.message) {
       response.error.message = 'An error has occurred';

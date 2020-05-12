@@ -16,6 +16,8 @@ import {Gateway, Status} from '../../models';
   styleUrls: ['./gateways.component.scss']
 })
 export class GatewaysComponent implements OnInit, OnDestroy {
+  private componentDestroy = new Subject<any>();
+  readonly pageSizes: number[] = SHORT_PAGE_SIZES;
   isLoading: boolean;
   dataSource: MatTableDataSource<any>;
   gatewayDevices: MatTableDataSource<any>;
@@ -24,17 +26,15 @@ export class GatewaysComponent implements OnInit, OnDestroy {
   selectedGateway: Gateway;
   paginator: MatPaginator;
   @ViewChild('gatewayDialog', {static: true}) gatewayDialog: TemplateRef<any>;
-  dialogRef: MatDialogRef<any>;
-  initials: any;
-  statusEnum = Status;
 
   @ViewChild(MatPaginator, {static: false}) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
     this.setDataSourceAttributes();
   }
 
-  private componentDestroy = new Subject<any>();
-  readonly pageSizes: number[] = SHORT_PAGE_SIZES;
+  dialogRef: MatDialogRef<any>;
+  initials: any;
+  statusEnum = Status;
   page = 1;
   pageSize = SHORT_PAGE_SIZES[0];
   totalRecords = 0;

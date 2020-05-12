@@ -32,7 +32,7 @@ describe('GatewaysComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  }); 
+  });
 
   it('should fill the table with values returned  from server', () => {
     const gateways: Gateway[] = [
@@ -104,5 +104,4 @@ describe('GatewaysComponent', () => {
       expect(tableRows.length).toBe(2);
     });
   });
-
 });
