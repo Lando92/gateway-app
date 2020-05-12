@@ -1,0 +1,87 @@
+.container {
+  padding: 2rem;
+  padding-top: 64px;
+}
+
+.custom-card {
+  margin-top: 2rem;
+  padding: 0 !important;
+
+  &-title {
+    padding: 1.2rem;
+    margin-bottom: 0px !important;
+  }
+}
+
+.mat-card-content {
+  min-height: 40rem;
+}
+
+.mat-card-content {
+  background: white;
+  min-height: 40rem;
+}
+
+// loader styles
+// example inside the table solution-list component
+.c-loading {
+  margin-top: 5rem;
+  padding: 2rem;
+  text-align: center;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #aaaaaa;
+
+  circle {
+    stroke: #aaaaaa !important;
+  }
+}
+
+// Circle whit initials
+.fletter {
+  margin-right: 1rem;
+  padding: 0.4rem;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #6c686b;
+  font-size: 12px;
+}
+
+// SnackBar Colors
+.success-snackbar {
+  background: #28A745 !important;
+  min-height: 80px !important;
+}
+
+.warning-snackbar {
+  background: #ffc107 !important;
+  min-height: 80px !important;
+  color: #343a40 !important;
+}
+
+.error-snackbar {
+  background: #DC3545 !important;
+  min-height: 80px !important;
+}
+
+.mat-simple-snackbar-action {
+  color: #ffffff !important;
+}
+
+.mat-icon {
+  svg {
+    fill: rgba(92, 88, 91, 0.9) !important
+  }
+}
+.add-icon {
+  svg {
+    fill: white !important;
+  }
+}

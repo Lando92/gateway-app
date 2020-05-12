@@ -1,0 +1,48 @@
+.mat-table {
+  max-height: 300px;
+  overflow: auto;
+  .mat-header-row {
+    position: sticky;
+    top: 0px;
+    background: white;
+    z-index: 1;
+  }
+}
+
+.gateway-form {
+  padding: 2rem;
+}
+
+.device-panel {
+  padding-left: 2rem;
+  border-left: 2px solid #e0e0e0;
+}
+
+.mat-column-remove {
+  flex: .4;
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 3rem 0;
+  .mat-flat-button {
+    margin: 1rem;
+  }
+}
+
+.mat-card-content {
+  min-height: 160px;
+}
+
+.green {
+  opacity: .6;
+  color: green;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.red {
+  color: red;
+}

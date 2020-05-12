@@ -1,0 +1,260 @@
+@import '../gateway-theme';
+
+/*
+ * Basic styles, good for a large display. Everything fits in
+ * one row, no wrapping. All text based cells grow equally.
+ */
+// Main container - row container
+.table-row {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+// Wrappers around cells and other wrappers
+.wrapper {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  //width: 100%;
+  justify-content: space-evenly;
+}
+
+// leaf level containers (cells): common properties
+.column {
+  flex-grow: 0;
+  -webkit-flex-grow: 0;
+  flex-shrink: 0;
+  -webkit-flex-shrink: 0;
+  //vertical-align: top;
+  padding: .75rem 1.25rem;
+  vertical-align: middle;
+}
+
+/*
+ * Media queries: optimize for different screen widths.
+ */
+
+@mixin horizontal() {
+  flex-direction: row;
+  -webkit-flex-direction: row;
+}
+
+@mixin vertical() {
+  // Let the wrapper flex vertically, so we get 2 rows
+  flex-direction: column;
+  -webkit-flex-direction: column;
+
+  // can't have the children grow, since this now means vertical growth
+  div {
+    flex-grow: 0;
+    -webkit-flex-grow: 0;
+  }
+}
+
+@mixin vertical-growing() {
+  @include vertical();
+
+  > div {
+    // Let immediate child divs grow horizontally, 100% to fill the wrapper
+    width: 100%;
+  }
+}
+
+/*
+ * Media breaks.
+ */
+
+mat-list {
+  overflow: auto;
+  max-height: 150px;
+}
+
+.table-badge {
+  background: #d0cece;
+  padding: 5px;
+  font-size: 12px;
+  display: block;
+}
+
+.no-rows {
+  font-size: 20px;
+  padding: 22px;
+  text-align: center;
+}
+
+.mat-cell,
+.mat-footer-cell {
+  font-size: 16px;
+  color: rgba(92, 88, 91, 0.9) !important;
+  //justify-content: center;
+
+  a {
+    color: #2196f3;
+    text-decoration: none;
+  }
+
+  &:first-child {
+    justify-content: normal;
+  }
+}
+
+.mat-header-cell {
+  font-size: 16px;
+  color: $primary;
+
+  &:last-of-type {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .mat-table {
+    border: 0;
+    padding: 1rem;
+    vertical-align: middle
+  }
+
+  .mat-table caption {
+    font-size: 1em;
+  }
+
+  //Enable this to hide header
+  .mat-table .mat-header-cell {
+
+    border: 10px solid;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .mat-table .mat-row {
+    border-bottom: 5px solid #ddd;
+    display: block;
+  }
+
+  /*
+  .mat-table .mat-row:nth-child(even) {background: #CCC}
+  .mat-table .mat-row:nth-child(odd) {background: #FFF}
+  */
+  .mat-table .mat-cell {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    //font-size: 1em;
+    text-align: right;
+    //font-weight: bold;
+    //height:30px;
+    margin-bottom: 4%;
+    padding-left: 24px;
+    padding-right: 24px;
+    font-size: 14px !important;
+    color: rgba(92, 88, 91, 0.9) !important;
+  }
+
+  .mat-table .mat-cell:before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    //text-transform: uppercase;
+    font-weight: bold;
+
+    font-size: .85em;
+  }
+
+  .mat-table .mat-cell:last-child {
+    border-bottom: 0;
+  }
+
+  .mat-table .mat-cell:first-child {
+    margin-top: 4%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .mat-table {
+    border: 0;
+    vertical-align: middle
+  }
+
+  .mat-table caption {
+    font-size: 1em;
+  }
+
+  //Enable this to hide header
+  .mat-table .mat-header-cell {
+
+    border: 10px solid;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .mat-table .mat-row {
+    border-bottom: 5px solid #ddd;
+    display: block;
+  }
+
+  /*
+  .mat-table .mat-row:nth-child(even) {background: #CCC}
+  .mat-table .mat-row:nth-child(odd) {background: #FFF}
+  */
+  .mat-table .mat-cell {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    //font-size: 1em;
+    text-align: right;
+    //font-weight: bold;
+    //height:30px;
+    margin-bottom: 4%;
+    padding-left: 24px;
+    padding-right: 24px;
+    font-size: 14px !important;
+    color: rgba(92, 88, 91, 0.9) !important;
+  }
+
+  .mat-table .mat-cell:before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    //text-transform: uppercase;
+    font-weight: bold;
+
+    font-size: .85em;
+  }
+
+  .mat-table .mat-cell:last-child {
+    border-bottom: 0;
+  }
+
+  .mat-table .mat-cell:first-child {
+    padding-top: 5%;
+    padding-bottom: 5%;
+  }
+}
+
+.gray {
+  background-color: rgba(0, 0, 0, .02);
+}
+
+.mat-paginator-range-label {
+  margin: 0 !important;
+}
