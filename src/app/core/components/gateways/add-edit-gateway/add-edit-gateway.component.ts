@@ -106,7 +106,7 @@ export class AddEditGatewayComponent implements OnInit, OnDestroy {
       takeUntil(this.componentDestroy)
     ).subscribe(() => {
       this.toasterService.showSuccessToaster('Gateway added successfully');
-      this.router.navigate(['/gateway']);
+      this.router.navigate(['gateway']);
     }, error1 => this.toasterService.showErrorToaster(error1.message));
   }
 
@@ -116,7 +116,7 @@ export class AddEditGatewayComponent implements OnInit, OnDestroy {
       takeUntil(this.componentDestroy)
     ).subscribe(() => {
       this.toasterService.showSuccessToaster('Gateway edited successfully');
-      this.router.navigate(['/gateway']);
+      this.router.navigate(['gateway']);
     }, error1 => this.toasterService.showErrorToaster(error1.message));
   }
 

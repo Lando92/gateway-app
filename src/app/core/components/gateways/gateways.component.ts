@@ -90,7 +90,7 @@ export class GatewaysComponent implements OnInit, OnDestroy {
     if ($event.pageSize !== this.pageSizes[0]) {
       queryParams.size = $event.pageSize;
     }
-    this.router.navigate(['/gateway'], {queryParams});
+    this.router.navigate(['gateway'], {queryParams});
   }
 
   ngOnDestroy(): void {
@@ -106,7 +106,7 @@ export class GatewaysComponent implements OnInit, OnDestroy {
   }
 
   goToEdit(id: any) {
-    this.router.navigate(['/gateway', id]);
+    this.router.navigate(['gateway', id]);
   }
 
   deleteGateway(gateway) {
