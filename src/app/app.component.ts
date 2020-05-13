@@ -19,9 +19,9 @@ export class AppComponent implements OnInit {
               private router: Router,
   ) {
     [
-      'close', 'edit', 'delete', 'eye'].forEach((iconName) => this.matIconRegistry.addSvgIcon(
+      'close', 'edit', 'delete', 'eye', 'add'].forEach((iconName) => this.matIconRegistry.addSvgIcon(
       `app-${iconName}`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl(`../assets/img/${iconName}.svg`)
+      this.domSanitizer.bypassSecurityTrustResourceUrl(`assets/img/${iconName}.svg`)
     ));
   }
 

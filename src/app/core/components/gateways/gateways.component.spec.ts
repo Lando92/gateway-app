@@ -32,7 +32,7 @@ describe('GatewaysComponent', () => {
     const iconRegistry = TestBed.inject(MatIconRegistry);
     const sanitizer = TestBed.inject(DomSanitizer);
     [
-      'close', 'edit', 'delete', 'eye'].forEach((iconName) => iconRegistry.addSvgIcon(
+      'close', 'edit', 'delete', 'eye', 'add'].forEach((iconName) => iconRegistry.addSvgIcon(
       `app-${iconName}`,
       sanitizer.bypassSecurityTrustResourceUrl(`../assets/img/${iconName}.svg`)
     ));

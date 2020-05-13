@@ -6,7 +6,9 @@
   clip-path: polygon(100% 0, 0 0, 0 100%, 100% 80%);
   height: 75vh;
   padding: 15rem 10rem 10rem;
-
+  &__headline {
+    text-align: center;
+  }
   &__title {
     font-size: 5.6rem;
     font-weight: 400;

@@ -10,7 +10,7 @@ before_script:
 script:
 - ng lint
 - npm run test-headless
-- ng build --prod --base-href https://Lando92.github.io/gateway-app/
+- ng build --prod --base-href https://lando92.github.io/gateway-app/
 deploy:
   provider: pages
   skip_cleanup: true
