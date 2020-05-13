@@ -17,6 +17,7 @@ import {isEqual} from 'lodash-es';
 export class AddEditGatewayComponent implements OnInit, OnDestroy {
   isEditing: boolean;
   currentGateway: Gateway;
+  isLoading: boolean;
   gatewayForm: FormGroup;
   deviceForm: FormGroup;
   deviceDatasource: MatTableDataSource<any>;
@@ -48,6 +49,7 @@ export class AddEditGatewayComponent implements OnInit, OnDestroy {
   }
 
   loadGatewayData(id: string) {
+    this.isLoading = true;
     this.gatewayService.getGateway(id).pipe(
       tap(res => {
         this.currentGateway = res;
@@ -60,6 +62,7 @@ export class AddEditGatewayComponent implements OnInit, OnDestroy {
           this.deviceForm.disable();
         }
         this.refreshTable();
+        this.isLoading = false;
       }),
       takeUntil(this.componentDestroy)
     ).subscribe(res => {

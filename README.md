@@ -1,6 +1,7 @@
 # GatewayApp
 
 [![Build Status][travis-image]][travis-url]
+
 Front End test project that consisting of managing gateways - 
 master devices that control multiple peripheral devices. Among its features it includes 
 saving, deleting, editing information from the gateways and their associated devices,

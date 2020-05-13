@@ -32,7 +32,11 @@
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
               <mat-card class="custom-card mat-elevation-z0">
                 <mat-card-title class="custom-card-title">Gateway Devices</mat-card-title>
-                <mat-card-content>
+                <mat-card-content class="c-loading" *ngIf="isLoading">
+                  <mat-spinner [diameter]="60"></mat-spinner>
+                  <p style="margin-top: 1rem" i18n>Loading...</p>
+                </mat-card-content>
+                <mat-card-content *ngIf="!isLoading">
                   <mat-table [dataSource]="deviceDatasource">
 
                     <ng-container matColumnDef="uid">
