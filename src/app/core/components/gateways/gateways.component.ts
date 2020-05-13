@@ -60,7 +60,8 @@ export class GatewaysComponent implements OnInit, OnDestroy {
         this.page = +params.get('page');
         this.pageSize = +params.get('size');
         if (!SHORT_PAGE_SIZES.some(ps => this.pageSize === ps)) {
-          this.router.navigate(['/gateway'], {
+          this.router.navigate([], {
+            relativeTo: this.route,
             queryParams: {pageSize: SHORT_PAGE_SIZES[0]},
             queryParamsHandling: 'merge'
           });
@@ -90,7 +91,7 @@ export class GatewaysComponent implements OnInit, OnDestroy {
     if ($event.pageSize !== this.pageSizes[0]) {
       queryParams.size = $event.pageSize;
     }
-    this.router.navigate(['gateway'], {queryParams});
+    this.router.navigate([], {relativeTo: this.route, queryParams});
   }
 
   ngOnDestroy(): void {
@@ -106,7 +107,7 @@ export class GatewaysComponent implements OnInit, OnDestroy {
   }
 
   goToEdit(id: any) {
-    this.router.navigate(['gateway', id]);
+    this.router.navigate(['/gateway', id]);
   }
 
   deleteGateway(gateway) {

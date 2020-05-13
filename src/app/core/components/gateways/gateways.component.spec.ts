@@ -10,6 +10,8 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import {GatewayService} from '../../services/gateway.service';
 import {of} from 'rxjs/index';
 import {Gateway} from '../../models';
+import {DomSanitizer} from '@angular/platform-browser';
+import {MatIconRegistry} from '@angular/material/icon';
 
 describe('GatewaysComponent', () => {
   let component: GatewaysComponent;
@@ -27,6 +29,13 @@ describe('GatewaysComponent', () => {
     fixture = TestBed.createComponent(GatewaysComponent);
     component = fixture.componentInstance;
     gatewayService = TestBed.inject(GatewayService);
+    const iconRegistry = TestBed.inject(MatIconRegistry);
+    const sanitizer = TestBed.inject(DomSanitizer);
+    [
+      'close', 'edit', 'delete', 'eye'].forEach((iconName) => iconRegistry.addSvgIcon(
+      `app-${iconName}`,
+      sanitizer.bypassSecurityTrustResourceUrl(`../assets/img/${iconName}.svg`)
+    ));
     fixture.detectChanges();
   });
 
@@ -98,10 +107,7 @@ describe('GatewaysComponent', () => {
     });
     component.getAllGateways();
     fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      fixture.detectChanges();
-      const tableRows = fixture.nativeElement.querySelectorAll('mat-row');
-      expect(tableRows.length).toBe(2);
-    });
+    const tableRows = fixture.nativeElement.querySelectorAll('mat-row');
+    expect(tableRows.length).toBe(2);
   });
 });

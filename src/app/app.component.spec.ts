@@ -2,6 +2,8 @@ import {TestBed, async} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
 import {MaterialModule} from './material.module';
+import {DomSanitizer} from '@angular/platform-browser';
+import {MatIconRegistry} from '@angular/material/icon';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {

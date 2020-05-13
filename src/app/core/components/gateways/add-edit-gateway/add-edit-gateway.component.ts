@@ -54,6 +54,11 @@ export class AddEditGatewayComponent implements OnInit, OnDestroy {
         this.gatewayForm.controls.name.setValue(res.displayName);
         this.gatewayForm.controls.ipAddress.setValue(res.ipv4_address);
         this.gatewayDevices = [...res.p_devices];
+        if (res.p_devices.length >= 10) {
+          // this.deviceForm.controls.status.disable();
+          // this.deviceForm.controls.createdDate.disable();
+          this.deviceForm.disable();
+        }
         this.refreshTable();
       }),
       takeUntil(this.componentDestroy)
@@ -143,6 +148,12 @@ export class AddEditGatewayComponent implements OnInit, OnDestroy {
 
   private refreshTable() {
     this.deviceDatasource = new MatTableDataSource<any>(this.gatewayDevices);
+    if (this.gatewayDevices.length >= 10) {
+      this.deviceForm.disable();
+    } else {
+      this.deviceForm.enable();
+    }
+
   }
 
   ngOnDestroy(): void {

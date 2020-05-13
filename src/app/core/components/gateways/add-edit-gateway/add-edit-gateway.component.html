@@ -117,14 +117,14 @@
                   class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9">
                   <mat-label i18n>Created Date</mat-label>
                   <input matInput [matDatepicker]="createdDate" placeholder="Created Date" [max]="todayDate"
-                         formControlName="createdDate" [disabled]="gatewayDevices.length === 10" required>
+                         formControlName="createdDate" required>
                   <mat-datepicker-toggle matSuffix [for]="createdDate"></mat-datepicker-toggle>
                   <mat-datepicker #createdDate></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field
                   class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9">
                   <mat-label i18n>Status</mat-label>
-                  <mat-select formControlName="status" [disabled]="gatewayDevices.length === 10" required="">
+                  <mat-select formControlName="status" required="">
                     <mat-option *ngFor="let selectedStatus of status" [value]="selectedStatus.value"
                                 [title]="selectedStatus.status">
                       {{ selectedStatus.status}}
