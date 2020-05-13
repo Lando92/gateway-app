@@ -1,7 +1,6 @@
 # GatewayApp
 
-[![Build Status](https://api.travis-ci.org/Lando92/gateway-app)](https://api.travis-ci.org/Lando92/gateway-app.svg?branch=master&status=passed)
-
+[![Build Status][travis-image]][travis-url]
 Front End test project that consisting of managing gateways - 
 master devices that control multiple peripheral devices. Among its features it includes 
 saving, deleting, editing information from the gateways and their associated devices,
@@ -36,3 +35,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+[travis-url]: https://travis-ci.org/Lando92/gateway-app
+[travis-image]: https://api.travis-ci.org/Lando92/gateway-app.svg?branch=master "Build status"
