@@ -1,6 +1,17 @@
 # GatewayApp
 
+[![Build Status](https://api.travis-ci.org/Lando92/gateway-app)](https://api.travis-ci.org/Lando92/gateway-app.svg?branch=master&status=passed)
+
+Front End test project that consisting of managing gateways - 
+master devices that control multiple peripheral devices. Among its features it includes 
+saving, deleting, editing information from the gateways and their associated devices,
+as well as allowing the user to add and remove associated devices from the gateways.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.5.
+
+
+## Live Demo:
+[Demo](https://lando92.github.io/gateway-app)
 
 ## Development server
 
